@@ -75,8 +75,9 @@
             let podcasts = await podcastStore.getAll();
 
             if (podcasts.length) {
-                listElem.innerHTML = podcasts.map(podcast => `<li>
+                listElem.innerHTML = podcasts.map(podcast => `<li id="${podcast.name}">
 name: ${podcast.name}, author: ${podcast.author}
+<button>modifier</button> <button onclick="suppr()">supprimer</button>
 </li>`).join('');
             } else {
                 listElem.innerHTML = '<li>No podcasts yet. Please add podcasts.</li>'
@@ -108,6 +109,16 @@ name: ${podcast.name}, author: ${podcast.author}
                     throw err;
                 }
             }
+            
+
+        }
+        function suppr(event){
+            let dataToDelete = event.target.getAttribute('')
+
+            let transaction = db.transaction(["podcastsdb"], "readwrite")
+            let request = transaction.objectStore("podcastsdb").delete(dataToDelete)
+
+            await list()
         }
 
 
