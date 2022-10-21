@@ -37,7 +37,7 @@ export class Podcasts {
             let podcasts = await podcastStore.getAll();
 
             if (podcasts.length) {
-                listElem.innerHTML = podcasts.map(podcast => `<li> name: ${podcast.name}, author: ${podcast.author} </li>`).join('');
+                listElem.innerHTML = podcasts.map(podcast => `<li id="${podcast.name}"> name: ${podcast.name}, author: ${podcast.author} <button>modifier</button> <button onclick="suppr()">supprimer</button></li>`).join('');
             } else {
                 listElem.innerHTML = '<li>No podcasts yet. Please add podcasts.</li>'
             }
@@ -68,6 +68,9 @@ export class Podcasts {
                     throw err;
                 }
             }
+        }
+        function suppr(event){
+            let dataDoDelete = event.target.getAttribute('')
         }
 
         window.addEventListener('unhandledrejection', event => {
